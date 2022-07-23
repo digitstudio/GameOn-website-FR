@@ -67,7 +67,7 @@ function validate() {
   event.preventDefault(); // Avoid default behavior of form
 
   // We check only State of checkbox since default behavior of HTML required and minlength do the job and prevent from sending form
-  if (stateCheckBox() == true) {
+  if (stateCheckBox()) {
     alert("Merci! Votre réservation a été reçue."); // Alert to show réservation is done
     closeModal(); // Close the form
   }
