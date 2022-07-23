@@ -41,42 +41,39 @@ function closeModal() {
 function stateCheckBox() {
   if (checkBox1.checked) {
     btnSubmit.classList.remove("btn-disabled");
-    return true;
   } else {
     btnSubmit.classList.add("btn-disabled");
-    return false;
   }
 }
 
 // Set custom error message
-function customMessageInput(elementID,Message) {
-
-  elementID.addEventListener('input', () => {
-    elementID.setCustomValidity('');
+function customMessageInput(elementID, Message) {
+  elementID.addEventListener("input", () => {
+    elementID.setCustomValidity("");
     elementID.checkValidity();
   });
 
-  elementID.addEventListener('invalid', () => {
+  elementID.addEventListener("invalid", () => {
     elementID.setCustomValidity(Message);
   });
-  
-
 }
+
 // Function validate form
 function validate() {
   event.preventDefault(); // Avoid default behavior of form
 
   // We check only State of checkbox since default behavior of HTML required and minlength do the job and prevent from sending form
-  if (stateCheckBox()) {
+  if (checkBox1.checked) {
     alert("Merci! Votre réservation a été reçue."); // Alert to show réservation is done
     closeModal(); // Close the form
-  }
-  else {
-    alert("Vous devez accepter les conditions d'utilisation pour valider le formulaire !");
+  } else {
+    alert(
+      "Vous devez accepter les conditions d'utilisation pour valider le formulaire !"
+    );
   }
 }
 
-function Main() {
+function main() {
   // launch modal event
   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -86,13 +83,23 @@ function Main() {
   // Lauch CheckBox Check each time we click on the Checkbox1 (T.O.S)
   checkBox1.addEventListener("click", stateCheckBox);
 
-  // Custom message for input 
-  customMessageInput(inputFirst,"Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
-  customMessageInput(inputLast, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
-  customMessageInput(inputEmail, "Veuillez entrer un email au bon format.");
-  customMessageInput(inputBirthdate, "Vous devez entrer votre date de naissance.");
-
+  // Custom message for input
+  customMessageInput(
+    inputFirst,
+    "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+  );
+  customMessageInput(
+    inputLast,
+    "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+  );
+  customMessageInput(
+    inputEmail,
+    "Veuillez entrer un email au bon format."
+  );
+  customMessageInput(
+    inputBirthdate,
+    "Vous devez entrer votre date de naissance."
+  );
 }
 
-
-Main();
+main();
