@@ -23,7 +23,7 @@ const btnSubmit = document.getElementById("btn-submit");
 const inputFirst = document.getElementById("first");
 const inputLast = document.getElementById("last");
 const inputEmail = document.getElementById("email");
-const inputBirthdate = document.getElementById("birhtdate");
+const inputBirthdate = document.getElementById("birthdate");
 const checkBox1 = document.getElementById("checkbox1");
 
 // launch modal form
@@ -59,6 +59,14 @@ function clearForm() {
   );
 }
 
+// Minimal Age 15 ans 
+function minimalAge(age) {
+  const today = new Date();
+  let fullyear = today.getFullYear();
+  fullyear -= age;
+  inputBirthdate.setAttribute('max',fullyear + '-01-01');
+
+}
 
 // Set custom error message
 function customMessageInput(elementID, Message) {
@@ -92,6 +100,7 @@ function validate() {
 }
 
 function main() {
+  
   // launch modal event
   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -100,6 +109,9 @@ function main() {
 
   // Lauch CheckBox Check each time we click on the Checkbox1 (T.O.S)
   checkBox1.addEventListener("click", stateCheckBox);
+
+  // Set minimal age 
+  minimalAge(15);
 
   // Custom message for input
   customMessageInput(
