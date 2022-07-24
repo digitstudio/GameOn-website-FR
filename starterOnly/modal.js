@@ -15,6 +15,9 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 
+// Main form 
+const formreserve = document.getElementById("reserve");
+
 // Found button by ID
 const closeBtn = document.getElementById("close");
 const btnSubmit = document.getElementById("btn-submit");
@@ -64,7 +67,7 @@ function minimalAge(age) {
   const today = new Date();
   let fullyear = today.getFullYear();
   fullyear -= age;
-  inputBirthdate.setAttribute('max',fullyear + '-01-01');
+  inputBirthdate.setAttribute('max', fullyear + '-01-01');
 
 }
 
@@ -100,36 +103,40 @@ function validate() {
 }
 
 function main() {
-  
-  // launch modal event
-  modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-  // Lauch close modal event
-  closeBtn.addEventListener("click", closeModal);
+  // Detect if the form is on the page otherwise don't run the script 
+  if (formreserve) {
+    // launch modal event
+    modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-  // Lauch CheckBox Check each time we click on the Checkbox1 (T.O.S)
-  checkBox1.addEventListener("click", stateCheckBox);
+    // Lauch close modal event
+    closeBtn.addEventListener("click", closeModal);
 
-  // Set minimal age 
-  minimalAge(15);
+    // Lauch CheckBox Check each time we click on the Checkbox1 (T.O.S)
+    checkBox1.addEventListener("click", stateCheckBox);
 
-  // Custom message for input
-  customMessageInput(
-    inputFirst,
-    "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
-  );
-  customMessageInput(
-    inputLast,
-    "Veuillez entrer 2 caractères ou plus pour le champ du nom."
-  );
-  customMessageInput(
-    inputEmail,
-    "Veuillez entrer un email au bon format."
-  );
-  customMessageInput(
-    inputBirthdate,
-    "Vous devez entrer votre date de naissance."
-  );
+    // Set minimal age 
+    minimalAge(15);
+
+    // Custom message for input
+    customMessageInput(
+      inputFirst,
+      "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    );
+    customMessageInput(
+      inputLast,
+      "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    );
+    customMessageInput(
+      inputEmail,
+      "Veuillez entrer un email au bon format."
+    );
+    customMessageInput(
+      inputBirthdate,
+      "Vous devez entrer votre date de naissance."
+    );
+  }
+
 }
 
 main();
