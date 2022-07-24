@@ -14,7 +14,6 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
 
 // Found button by ID
 const closeBtn = document.getElementById("close");
@@ -37,6 +36,7 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+
 // Check if i can enable the button submit by checking if "checkbox" is checked
 function stateCheckBox() {
   if (checkBox1.checked) {
@@ -46,16 +46,33 @@ function stateCheckBox() {
   }
 }
 
+
+// Clear Input Formulaire
+function clearForm() {
+  const formInputs = document.querySelectorAll("form input");
+  formInputs.forEach(input => {
+    if (input.id !== "btn-submit") {
+      console.log(input.id);
+      document.getElementById(input.id).value = ""
+    }
+  }
+  );
+}
+
+
 // Set custom error message
 function customMessageInput(elementID, Message) {
-  elementID.addEventListener("input", () => {
-    elementID.setCustomValidity("");
-    elementID.checkValidity();
-  });
 
-  elementID.addEventListener("invalid", () => {
-    elementID.setCustomValidity(Message);
-  });
+  if (elementID) {
+    elementID.addEventListener("input", () => {
+      elementID.setCustomValidity("");
+      elementID.checkValidity();
+    });
+
+    elementID.addEventListener("invalid", () => {
+      elementID.setCustomValidity(Message);
+    });
+  }
 }
 
 // Function validate form
@@ -65,6 +82,7 @@ function validate() {
   // We check only State of checkbox since default behavior of HTML required and minlength do the job and prevent from sending form
   if (checkBox1.checked) {
     alert("Merci! Votre réservation a été reçue."); // Alert to show réservation is done
+    clearForm(); // Clear form input
     closeModal(); // Close the form
   } else {
     alert(
